@@ -1,0 +1,41 @@
+{
+  "name": "IQ Test Platform",
+  "description": "Plataforma profissional de teste de QI online com sistema de pagamento",
+  "repository": "https://github.com/seu-usuario/iq-test-platform",
+  "keywords": ["iq", "test", "intelligence", "online", "payment"],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment (production or development)",
+      "value": "production"
+    },
+    "JWT_SECRET": {
+      "description": "Secret key for JWT tokens (use a long random string)",
+      "value": "your-super-secret-jwt-key-change-this-in-production-12345"
+    },
+    "STRIPE_SECRET_KEY": {
+      "description": "Stripe Secret Key (sk_test_ or sk_live_)",
+      "value": "sk_test_your_stripe_secret_key_here"
+    },
+    "STRIPE_PUBLISHABLE_KEY": {
+      "description": "Stripe Publishable Key (pk_test_ or pk_live_)",
+      "value": "pk_test_your_stripe_publishable_key_here"
+    },
+    "CORS_ORIGIN": {
+      "description": "CORS origin (will be set to your Heroku app URL)",
+      "value": "https://your-app-name.herokuapp.com"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": []
+}
+
