@@ -29,18 +29,15 @@ async function loadQuestions() {
 
 // Mostrar seção
 function showSection(sectionId) {
-  // Esconder todas as seções
   document.querySelectorAll('.section').forEach(section => {
     section.classList.remove('active');
   });
 
-  // Mostrar seção selecionada
   const section = document.getElementById(sectionId);
   if (section) {
     section.classList.add('active');
   }
 
-  // Carregar conteúdo específico
   if (sectionId === 'profile' && appState.token) {
     loadProfile();
   }
@@ -268,7 +265,6 @@ function displayQuestion() {
     </div>
   `;
 
-  // Restaurar resposta anterior se existir
   const previousAnswer = appState.answers.find(a => a.question_id === question.id);
   if (previousAnswer !== undefined) {
     const radioButton = document.querySelector(`input[name="answer"][value="${previousAnswer.answer}"]`);
@@ -310,77 +306,78 @@ function previousQuestion() {
   }
 }
 
-// Submeter teste
-async function submitTest() {
+// Submeter teste - NOVO FLUXO: Mostra respostas gratuitamente
+function submitTest() {
   if (appState.answers.length < appState.questions.length) {
     showAlert('Por favor, responda todas as questões antes de finalizar', 'warning');
     return;
   }
 
-  try {
-    const response = await fetch('/api/test/submit-answers', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${appState.token}`
-      },
-      body: JSON.stringify({
-        test_session_id: appState.currentTestSession,
-        answers: appState.answers
-      })
-    });
+  // Calcular respostas corretas
+  let correctCount = 0;
+  const answersWithCorrect = appState.answers.map(answer => {
+    const question = appState.questions.find(q => q.id === answer.question_id);
+    const isCorrect = answer.answer === question.correct_answer;
+    if (isCorrect) correctCount++;
+    return {
+      question_id: answer.question_id,
+      userAnswer: question.options[answer.answer],
+      correctAnswer: question.options[question.correct_answer],
+      isCorrect: isCorrect,
+      questionText: question.question
+    };
+  });
 
-    const data = await response.json();
-
-    if (response.ok) {
-      displayResults(data);
-    } else {
-      showAlert(data.error || 'Erro ao submeter teste', 'error');
-    }
-  } catch (error) {
-    showAlert('Erro ao submeter teste: ' + error.message, 'error');
-  }
+  // Exibir resultados gratuitos (respostas corretas)
+  displayFreeResults(correctCount, answersWithCorrect);
 }
 
-// Exibir resultados
-function displayResults(results) {
+// Exibir resultados gratuitos (sem QI)
+function displayFreeResults(correctCount, answersWithCorrect) {
+  const percentage = Math.round((correctCount / appState.questions.length) * 100);
+  
+  const answersHtml = answersWithCorrect.map((answer, index) => `
+    <div class="answer-review ${answer.isCorrect ? 'correct' : 'incorrect'}">
+      <h4>Questão ${index + 1}: ${answer.isCorrect ? '✅ Correta' : '❌ Incorreta'}</h4>
+      <p><strong>Pergunta:</strong> ${answer.questionText}</p>
+      <p><strong>Sua resposta:</strong> ${answer.userAnswer}</p>
+      ${!answer.isCorrect ? `<p><strong>Resposta correta:</strong> ${answer.correctAnswer}</p>` : ''}
+    </div>
+  `).join('');
+
   const resultsContent = document.getElementById('resultsContent');
   resultsContent.innerHTML = `
     <div class="result-card">
-      <h3>Seu Quociente de Inteligência (QI)</h3>
-      <div class="result-score">${results.iq_score}</div>
-      <div class="result-classification">${results.classification}</div>
-      <p style="text-align: center; color: #6b7280;">Percentil: ${results.percentile}%</p>
-      
-      <h3 style="margin-top: 2rem;">Análise por Área</h3>
-      <div class="result-details">
-        <div class="result-detail">
-          <div class="result-detail-label">Compreensão Verbal</div>
-          <div class="result-detail-value">${results.verbal_index}</div>
-        </div>
-        <div class="result-detail">
-          <div class="result-detail-label">Organização Perceptual</div>
-          <div class="result-detail-value">${results.perceptual_index}</div>
-        </div>
-        <div class="result-detail">
-          <div class="result-detail-label">Memória Operacional</div>
-          <div class="result-detail-value">${results.memory_index}</div>
-        </div>
-        <div class="result-detail">
-          <div class="result-detail-label">Velocidade de Processamento</div>
-          <div class="result-detail-value">${results.processing_speed_index}</div>
-        </div>
-      </div>
-
-      <p style="margin-top: 2rem; padding: 1rem; background-color: var(--light-bg); border-radius: 0.5rem;">
-        <strong>Sobre seu resultado:</strong> Sua pontuação de QI foi comparada com a população geral. 
-        Uma pontuação de 100 representa a média, com um desvio padrão de 15 pontos. 
-        Sua classificação indica seu desempenho em relação aos pares.
+      <h3>Teste Concluído!</h3>
+      <div class="result-score">${correctCount}/${appState.questions.length}</div>
+      <p style="text-align: center; font-size: 1.2rem; color: #2563eb; margin: 1rem 0;">
+        <strong>Você acertou ${percentage}% das questões</strong>
       </p>
 
+      <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 0.5rem; margin: 2rem 0;">
+        <p><strong>🎯 Quer saber seu QI e análise detalhada?</strong></p>
+        <p>Pague apenas <strong>R$ 29,99</strong> para desbloquear:</p>
+        <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+          <li>Seu Quociente de Inteligência (QI) preciso</li>
+          <li>Análise por área cognitiva</li>
+          <li>Classificação de inteligência</li>
+          <li>Comparação com população geral</li>
+          <li>Relatório detalhado em PDF</li>
+        </ul>
+      </div>
+
+      <h3 style="margin-top: 2rem;">Suas Respostas</h3>
+      <div class="answers-list">
+        ${answersHtml}
+      </div>
+
       <div style="margin-top: 2rem; text-align: center;">
-        <button class="btn btn-primary" onclick="showSection('home')">Voltar ao Início</button>
-        <button class="btn btn-secondary" onclick="downloadResults('${results.result_id}')">Baixar Relatório</button>
+        <button class="btn btn-primary" onclick="purchaseDetailedResults()" style="padding: 1rem 2rem; font-size: 1.1rem;">
+          🔓 Desbloquear Análise Completa - R$ 29,99
+        </button>
+        <button class="btn btn-secondary" onclick="showSection('home')" style="margin-left: 1rem;">
+          Voltar ao Início
+        </button>
       </div>
     </div>
   `;
@@ -388,9 +385,32 @@ function displayResults(results) {
   showSection('results');
 }
 
-// Baixar resultados (placeholder)
-function downloadResults(resultId) {
-  showAlert('Funcionalidade de download será implementada em breve', 'warning');
+// Comprar análise detalhada
+async function purchaseDetailedResults() {
+  try {
+    const response = await fetch('/api/payment/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${appState.token}`
+      },
+      body: JSON.stringify({
+        email: appState.user.email,
+        test_session_id: appState.currentTestSession
+      })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // Redirecionar para Stripe Checkout
+      window.location.href = data.url;
+    } else {
+      showAlert(data.error || 'Erro ao criar sessão de pagamento', 'error');
+    }
+  } catch (error) {
+    showAlert('Erro ao processar pagamento: ' + error.message, 'error');
+  }
 }
 
 // Exibir alerta
