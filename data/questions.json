@@ -1,0 +1,215 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "verbal",
+      "type": "similarity",
+      "question": "Como 'gato' e 'cachorro' são semelhantes?",
+      "options": [
+        "Ambos são animais domésticos",
+        "Ambos têm quatro patas",
+        "Ambos são mamíferos",
+        "Todas as alternativas estão corretas"
+      ],
+      "correct_answer": 3,
+      "difficulty": "easy"
+    },
+    {
+      "id": 2,
+      "category": "verbal",
+      "type": "vocabulary",
+      "question": "O que significa a palavra 'perspicaz'?",
+      "options": [
+        "Que tem visão aguçada",
+        "Que tem compreensão profunda e inteligência aguçada",
+        "Que é muito rápido",
+        "Que é muito lento"
+      ],
+      "correct_answer": 1,
+      "difficulty": "medium"
+    },
+    {
+      "id": 3,
+      "category": "verbal",
+      "type": "analogy",
+      "question": "Médico está para medicina assim como engenheiro está para:",
+      "options": [
+        "Construção",
+        "Engenharia",
+        "Projeto",
+        "Máquina"
+      ],
+      "correct_answer": 1,
+      "difficulty": "easy"
+    },
+    {
+      "id": 4,
+      "category": "perceptual",
+      "type": "matrix",
+      "question": "Qual número deveria substituir o ponto de interrogação? [3, 6, 9, 12, ?]",
+      "options": [
+        "14",
+        "15",
+        "16",
+        "18"
+      ],
+      "correct_answer": 3,
+      "difficulty": "easy"
+    },
+    {
+      "id": 5,
+      "category": "perceptual",
+      "type": "pattern",
+      "question": "Qual é o próximo número na sequência? [2, 4, 8, 16, ?]",
+      "options": [
+        "24",
+        "32",
+        "36",
+        "40"
+      ],
+      "correct_answer": 1,
+      "difficulty": "medium"
+    },
+    {
+      "id": 6,
+      "category": "perceptual",
+      "type": "logic",
+      "question": "Se todos os A são B e todos os B são C, então todos os A são C?",
+      "options": [
+        "Verdadeiro",
+        "Falso",
+        "Não pode ser determinado",
+        "Depende do contexto"
+      ],
+      "correct_answer": 0,
+      "difficulty": "medium"
+    },
+    {
+      "id": 7,
+      "category": "memory",
+      "type": "sequence",
+      "question": "Memorize esta sequência de números: 7, 3, 9, 2, 5. Qual era o terceiro número?",
+      "options": [
+        "3",
+        "9",
+        "2",
+        "5"
+      ],
+      "correct_answer": 1,
+      "difficulty": "easy"
+    },
+    {
+      "id": 8,
+      "category": "memory",
+      "type": "recall",
+      "question": "Qual é a capital da França?",
+      "options": [
+        "Lyon",
+        "Marselha",
+        "Paris",
+        "Nice"
+      ],
+      "correct_answer": 2,
+      "difficulty": "easy"
+    },
+    {
+      "id": 9,
+      "category": "processing_speed",
+      "type": "counting",
+      "question": "Quantos triângulos existem na figura abaixo? (Imagine uma figura com 4 triângulos pequenos formando um triângulo grande)",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "correct_answer": 2,
+      "difficulty": "medium"
+    },
+    {
+      "id": 10,
+      "category": "processing_speed",
+      "type": "matching",
+      "question": "Qual número é diferente? [12, 24, 36, 48, 61]",
+      "options": [
+        "12",
+        "24",
+        "36",
+        "61"
+      ],
+      "correct_answer": 3,
+      "difficulty": "easy"
+    },
+    {
+      "id": 11,
+      "category": "verbal",
+      "type": "comprehension",
+      "question": "Se você rearranjasse as letras 'LOCEHO', qual palavra formaria?",
+      "options": [
+        "ESCOLA",
+        "ESCOLHO",
+        "COLHER",
+        "ESCOLHA"
+      ],
+      "correct_answer": 2,
+      "difficulty": "medium"
+    },
+    {
+      "id": 12,
+      "category": "perceptual",
+      "type": "spatial",
+      "question": "Se você dobrar um cubo de papel com as faces numeradas de 1 a 6, qual número fica oposto ao 1?",
+      "options": [
+        "2",
+        "3",
+        "5",
+        "6"
+      ],
+      "correct_answer": 3,
+      "difficulty": "hard"
+    },
+    {
+      "id": 13,
+      "category": "memory",
+      "type": "working_memory",
+      "question": "Se A = 1, B = 2, C = 3... Z = 26, qual é o valor de D + E + F?",
+      "options": [
+        "12",
+        "14",
+        "15",
+        "18"
+      ],
+      "correct_answer": 2,
+      "difficulty": "medium"
+    },
+    {
+      "id": 14,
+      "category": "processing_speed",
+      "type": "visual_search",
+      "question": "Encontre a letra 'Q' na sequência: PQRSTUVWXYZ",
+      "options": [
+        "1ª posição",
+        "2ª posição",
+        "3ª posição",
+        "Não existe"
+      ],
+      "correct_answer": 1,
+      "difficulty": "easy"
+    },
+    {
+      "id": 15,
+      "category": "verbal",
+      "type": "reasoning",
+      "question": "Qual é a conclusão lógica? Todos os pássaros têm asas. Pinguins são pássaros. Portanto:",
+      "options": [
+        "Pinguins não têm asas",
+        "Pinguins têm asas",
+        "Nem todos os pinguins têm asas",
+        "Não pode ser determinado"
+      ],
+      "correct_answer": 1,
+      "difficulty": "easy"
+    }
+  ]
+}
+

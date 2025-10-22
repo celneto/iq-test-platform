@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste de QI Online - Plataforma Profissional</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <h1>IQ Test Pro</h1>
+        </div>
+        <div class="navbar-menu" id="navbarMenu">
+          <a href="#" class="nav-link" onclick="showSection('home')">Início</a>
+          <a href="#" class="nav-link" onclick="showSection('about')">Sobre</a>
+          <a href="#" class="nav-link" id="profileLink" style="display:none;" onclick="showSection('profile')">Perfil</a>
+          <a href="#" class="nav-link" id="logoutLink" style="display:none;" onclick="logout()">Sair</a>
+          <a href="#" class="nav-link" id="loginLink" onclick="showSection('login')">Login</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+      <div class="container">
+        <div class="hero">
+          <h2>Descubra seu Quociente de Inteligência</h2>
+          <p>Teste profissional de QI com 15 questões abrangentes que avaliam suas habilidades cognitivas em diferentes áreas.</p>
+          <button class="btn btn-primary" onclick="startTest()">Iniciar Teste</button>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <h3>Compreensão Verbal</h3>
+            <p>Avalia sua capacidade de raciocínio verbal e conhecimento adquirido.</p>
+          </div>
+          <div class="feature">
+            <h3>Organização Perceptual</h3>
+            <p>Mede sua habilidade de raciocínio não verbal e resolução de problemas visuais.</p>
+          </div>
+          <div class="feature">
+            <h3>Memória Operacional</h3>
+            <p>Avalia sua capacidade de reter e manipular informações na mente.</p>
+          </div>
+          <div class="feature">
+            <h3>Velocidade de Processamento</h3>
+            <p>Mede a rapidez e precisão no processamento de informações visuais.</p>
+          </div>
+        </div>
+
+        <div class="pricing">
+          <h2>Preço</h2>
+          <div class="price-card">
+            <h3>Teste Completo</h3>
+            <p class="price">R$ 29,99</p>
+            <ul>
+              <li>15 questões abrangentes</li>
+              <li>Análise detalhada de resultados</li>
+              <li>Relatório com classificação</li>
+              <li>Acesso aos resultados por 1 ano</li>
+            </ul>
+            <button class="btn btn-primary" onclick="startTest()">Comprar Agora</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2>Sobre o Teste</h2>
+        <p>Nosso teste de QI é baseado em metodologias profissionais reconhecidas internacionalmente, como a Escala de Inteligência Wechsler para Adultos (WAIS).</p>
+        <p>O teste avalia quatro áreas principais da inteligência e fornece uma pontuação padronizada com média 100 e desvio padrão 15.</p>
+        <h3>Classificação de Resultados</h3>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Faixa de QI</th>
+              <th>Classificação</th>
+              <th>Percentual da População</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>130+</td>
+              <td>Muito Superior</td>
+              <td>2.2%</td>
+            </tr>
+            <tr>
+              <td>120-129</td>
+              <td>Superior</td>
+              <td>6.7%</td>
+            </tr>
+            <tr>
+              <td>110-119</td>
+              <td>Acima da Média</td>
+              <td>16.1%</td>
+            </tr>
+            <tr>
+              <td>90-109</td>
+              <td>Média</td>
+              <td>50%</td>
+            </tr>
+            <tr>
+              <td>80-89</td>
+              <td>Abaixo da Média</td>
+              <td>16.1%</td>
+            </tr>
+            <tr>
+              <td>70-79</td>
+              <td>Limítrofe</td>
+              <td>6.7%</td>
+            </tr>
+            <tr>
+              <td>69-</td>
+              <td>Extremamente Baixo</td>
+              <td>2.2%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="section">
+      <div class="container">
+        <div class="form-container">
+          <h2>Login</h2>
+          <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label for="loginEmail">Email:</label>
+              <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Senha:</label>
+              <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+            <p>Não tem conta? <a href="#" onclick="showSection('register')">Registre-se aqui</a></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Register Section -->
+    <section id="register" class="section">
+      <div class="container">
+        <div class="form-container">
+          <h2>Registrar</h2>
+          <form id="registerForm" onsubmit="handleRegister(event)">
+            <div class="form-group">
+              <label for="registerName">Nome:</label>
+              <input type="text" id="registerName" required>
+            </div>
+            <div class="form-group">
+              <label for="registerEmail">Email:</label>
+              <input type="email" id="registerEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="registerPassword">Senha:</label>
+              <input type="password" id="registerPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <p>Já tem conta? <a href="#" onclick="showSection('login')">Faça login aqui</a></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Test Section -->
+    <section id="test" class="section">
+      <div class="container">
+        <div class="test-container">
+          <h2>Teste de QI</h2>
+          <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+          </div>
+          <p id="questionCounter"></p>
+          <div id="testContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="section">
+      <div class="container">
+        <div class="results-container">
+          <h2>Seus Resultados</h2>
+          <div id="resultsContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="section">
+      <div class="container">
+        <h2>Meu Perfil</h2>
+        <div id="profileContent"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
+
