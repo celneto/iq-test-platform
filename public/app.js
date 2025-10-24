@@ -388,32 +388,9 @@ async function purchaseDetailedResults() {
   proceedToPayment(appState.user.email);
 }
 
-// Prosseguir para pagamento
-async function proceedToPayment(email) {
-  try {
-    const response = await fetch('/api/payment/create-checkout-session', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(appState.token && { 'Authorization': `Bearer ${appState.token}` })
-      },
-      body: JSON.stringify({
-        email: email,
-        test_answers: appState.answers
-      })
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      // Redirecionar para Stripe Checkout
-      window.location.href = data.url;
-    } else {
-      showAlert(data.error || 'Erro ao criar sessão de pagamento', 'error');
-    }
-  } catch (error) {
-    showAlert('Erro ao processar pagamento: ' + error.message, 'error');
-  }
+// Prosseguir para pagamento com PayPal
+function proceedToPayment(email) {
+  purchaseWithPayPal(email);
 }
 
 // Exibir alerta

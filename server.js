@@ -19,12 +19,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 const authRoutes = require('./routes/auth');
 const testRoutes = require('./routes/test');
 const paymentRoutes = require('./routes/payment');
+const paypalRoutes = require('./routes/paypal');
 const resultsRoutes = require('./routes/results');
 
 // Usar rotas
 app.use('/api/auth', authRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/paypal', paypalRoutes);
 app.use('/api/results', resultsRoutes);
 
 // Rota principal
