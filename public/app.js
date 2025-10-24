@@ -6,7 +6,8 @@ const appState = {
   questions: [],
   currentQuestionIndex: 0,
   answers: [],
-  testStartTime: null
+  testStartTime: null,
+  isGuestTest: false
 };
 
 // Inicializar aplicação
@@ -204,35 +205,14 @@ async function loadUserResults() {
   }
 }
 
-// Iniciar teste
-async function startTest() {
-  if (!appState.token) {
-    showAlert('Você precisa fazer login para realizar o teste', 'warning');
-    showSection('login');
-    return;
-  }
-
-  try {
-    const response = await fetch('/api/test/start', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${appState.token}` }
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      appState.currentTestSession = data.test_session_id;
-      appState.currentQuestionIndex = 0;
-      appState.answers = [];
-      appState.testStartTime = Date.now();
-      showSection('test');
-      displayQuestion();
-    } else {
-      showAlert(data.error || 'Erro ao iniciar teste', 'error');
-    }
-  } catch (error) {
-    showAlert('Erro ao iniciar teste: ' + error.message, 'error');
-  }
+// Iniciar teste (SEM LOGIN NECESSÁRIO)
+function startTest() {
+  appState.isGuestTest = true;
+  appState.currentQuestionIndex = 0;
+  appState.answers = [];
+  appState.testStartTime = Date.now();
+  showSection('test');
+  displayQuestion();
 }
 
 // Exibir questão
@@ -306,7 +286,7 @@ function previousQuestion() {
   }
 }
 
-// Submeter teste - NOVO FLUXO: Mostra respostas gratuitamente
+// Submeter teste
 function submitTest() {
   if (appState.answers.length < appState.questions.length) {
     showAlert('Por favor, responda todas as questões antes de finalizar', 'warning');
@@ -328,11 +308,11 @@ function submitTest() {
     };
   });
 
-  // Exibir resultados gratuitos (respostas corretas)
+  // Exibir resultados com opção de pagamento
   displayFreeResults(correctCount, answersWithCorrect);
 }
 
-// Exibir resultados gratuitos (sem QI)
+// Exibir resultados (SEM LOGIN)
 function displayFreeResults(correctCount, answersWithCorrect) {
   const percentage = Math.round((correctCount / appState.questions.length) * 100);
   
@@ -354,6 +334,11 @@ function displayFreeResults(correctCount, answersWithCorrect) {
         <strong>Você acertou ${percentage}% das questões</strong>
       </p>
 
+      <h3 style="margin-top: 2rem;">Suas Respostas</h3>
+      <div class="answers-list">
+        ${answersHtml}
+      </div>
+
       <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 0.5rem; margin: 2rem 0;">
         <p><strong>🎯 Quer saber seu QI e análise detalhada?</strong></p>
         <p>Pague apenas <strong>R$ 29,99</strong> para desbloquear:</p>
@@ -364,11 +349,6 @@ function displayFreeResults(correctCount, answersWithCorrect) {
           <li>Comparação com população geral</li>
           <li>Relatório detalhado em PDF</li>
         </ul>
-      </div>
-
-      <h3 style="margin-top: 2rem;">Suas Respostas</h3>
-      <div class="answers-list">
-        ${answersHtml}
       </div>
 
       <div style="margin-top: 2rem; text-align: center;">
@@ -387,16 +367,39 @@ function displayFreeResults(correctCount, answersWithCorrect) {
 
 // Comprar análise detalhada
 async function purchaseDetailedResults() {
+  // Se não estiver logado, pedir para fazer login ou continuar como guest
+  if (!appState.token) {
+    const userChoice = confirm('Você precisa fazer login ou fornecer um email para receber a análise.\n\nDeseja fazer login agora?');
+    
+    if (userChoice) {
+      showSection('login');
+      return;
+    } else {
+      // Continuar como guest - pedir email
+      const email = prompt('Digite seu email para receber a análise:');
+      if (!email) return;
+      
+      proceedToPayment(email);
+      return;
+    }
+  }
+
+  // Se estiver logado, usar email do usuário
+  proceedToPayment(appState.user.email);
+}
+
+// Prosseguir para pagamento
+async function proceedToPayment(email) {
   try {
     const response = await fetch('/api/payment/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${appState.token}`
+        ...(appState.token && { 'Authorization': `Bearer ${appState.token}` })
       },
       body: JSON.stringify({
-        email: appState.user.email,
-        test_session_id: appState.currentTestSession
+        email: email,
+        test_answers: appState.answers
       })
     });
 
