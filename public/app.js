@@ -4,6 +4,7 @@ const appState = {
   user: JSON.parse(localStorage.getItem('user') || 'null'),
   currentTestSession: null,
   questions: [],
+  allQuestions: [],
   currentQuestionIndex: 0,
   answers: [],
   testStartTime: null,
@@ -22,10 +23,25 @@ async function loadQuestions() {
   try {
     const response = await fetch('/api/test/questions');
     const data = await response.json();
-    appState.questions = data.questions;
+    appState.allQuestions = data.questions;
+    shuffleAndSelectQuestions();
   } catch (error) {
     console.error('Erro ao carregar questões:', error);
   }
+}
+
+// Embaralhar perguntas e selecionar 32 aleatórias
+function shuffleAndSelectQuestions() {
+  // Embaralhar array
+  const shuffled = [...appState.allQuestions].sort(() => Math.random() - 0.5);
+  // Selecionar as primeiras 32
+  appState.questions = shuffled.slice(0, 32);
+  // Embaralhar as opções de cada pergunta
+  appState.questions.forEach(question => {
+    const correctAnswer = question.options[question.correct_answer];
+    question.options = question.options.sort(() => Math.random() - 0.5);
+    question.correct_answer = question.options.indexOf(correctAnswer);
+  });
 }
 
 // Mostrar seção
@@ -308,23 +324,21 @@ function submitTest() {
     };
   });
 
-  // Exibir resultados com opção de pagamento
-  displayFreeResults(correctCount, answersWithCorrect);
+  // Salvar respostas para uso após pagamento
+  appState.testResults = {
+    correctCount: correctCount,
+    answersWithCorrect: answersWithCorrect,
+    totalQuestions: appState.questions.length
+  };
+
+  // Exibir resultados SEM mostrar respostas
+  displayResultsWithoutAnswers(correctCount);
 }
 
-// Exibir resultados (SEM LOGIN)
-function displayFreeResults(correctCount, answersWithCorrect) {
+// Exibir resultados SEM mostrar respostas (pedir pagamento)
+function displayResultsWithoutAnswers(correctCount) {
   const percentage = Math.round((correctCount / appState.questions.length) * 100);
   
-  const answersHtml = answersWithCorrect.map((answer, index) => `
-    <div class="answer-review ${answer.isCorrect ? 'correct' : 'incorrect'}">
-      <h4>Questão ${index + 1}: ${answer.isCorrect ? '✅ Correta' : '❌ Incorreta'}</h4>
-      <p><strong>Pergunta:</strong> ${answer.questionText}</p>
-      <p><strong>Sua resposta:</strong> ${answer.userAnswer}</p>
-      ${!answer.isCorrect ? `<p><strong>Resposta correta:</strong> ${answer.correctAnswer}</p>` : ''}
-    </div>
-  `).join('');
-
   const resultsContent = document.getElementById('resultsContent');
   resultsContent.innerHTML = `
     <div class="result-card">
@@ -334,19 +348,15 @@ function displayFreeResults(correctCount, answersWithCorrect) {
         <strong>Você acertou ${percentage}% das questões</strong>
       </p>
 
-      <h3 style="margin-top: 2rem;">Suas Respostas</h3>
-      <div class="answers-list">
-        ${answersHtml}
-      </div>
-
       <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem; border-radius: 0.5rem; margin: 2rem 0;">
-        <p><strong>🎯 Quer saber seu QI e análise detalhada?</strong></p>
+        <p><strong>🎯 Quer ver suas respostas e análise detalhada de QI?</strong></p>
         <p>Pague apenas <strong>R$ 29,99</strong> para desbloquear:</p>
         <ul style="margin: 1rem 0; padding-left: 1.5rem;">
           <li>Seu Quociente de Inteligência (QI) preciso</li>
           <li>Análise por área cognitiva</li>
           <li>Classificação de inteligência</li>
           <li>Comparação com população geral</li>
+          <li>Revisão completa de suas respostas</li>
           <li>Relatório detalhado em PDF</li>
         </ul>
       </div>
@@ -388,9 +398,42 @@ async function purchaseDetailedResults() {
   proceedToPayment(appState.user.email);
 }
 
-// Prosseguir para pagamento com PayPal
+// Prosseguir para pagamento com Stripe
 function proceedToPayment(email) {
-  purchaseWithPayPal(email);
+  // Salvar email para usar após retorno do Stripe
+  localStorage.setItem('test_email', email);
+  localStorage.setItem('test_results', JSON.stringify(appState.testResults));
+  
+  // Iniciar pagamento com Stripe
+  initiateStripePayment(email);
+}
+
+// Iniciar pagamento Stripe
+async function initiateStripePayment(email) {
+  try {
+    const response = await fetch('/api/payment/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(appState.token && { 'Authorization': `Bearer ${appState.token}` })
+      },
+      body: JSON.stringify({
+        email: email,
+        test_answers: appState.answers
+      })
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.url) {
+      // Redirecionar para Stripe Checkout
+      window.location.href = data.url;
+    } else {
+      showAlert(data.error || 'Erro ao criar sessão de pagamento', 'error');
+    }
+  } catch (error) {
+    showAlert('Erro ao processar pagamento: ' + error.message, 'error');
+  }
 }
 
 // Exibir alerta
