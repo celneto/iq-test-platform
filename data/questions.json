@@ -3,213 +3,258 @@
     {
       "id": 1,
       "category": "verbal",
-      "type": "similarity",
-      "question": "Como 'gato' e 'cachorro' são semelhantes?",
-      "options": [
-        "Ambos são animais domésticos",
-        "Ambos têm quatro patas",
-        "Ambos são mamíferos",
-        "Todas as alternativas estão corretas"
-      ],
-      "correct_answer": 3,
-      "difficulty": "easy"
+      "difficulty": "medium",
+      "question": "Qual é o antônimo de 'abundância'?",
+      "options": ["Riqueza", "Escassez", "Prosperidade", "Fartura"],
+      "correct_answer": 1
     },
     {
       "id": 2,
-      "category": "verbal",
-      "type": "vocabulary",
-      "question": "O que significa a palavra 'perspicaz'?",
-      "options": [
-        "Que tem visão aguçada",
-        "Que tem compreensão profunda e inteligência aguçada",
-        "Que é muito rápido",
-        "Que é muito lento"
-      ],
-      "correct_answer": 1,
-      "difficulty": "medium"
+      "category": "perceptual",
+      "difficulty": "medium",
+      "question": "Se você rotaciona um quadrado 45 graus, qual forma ele se torna?",
+      "options": ["Triângulo", "Losango", "Retângulo", "Pentágono"],
+      "correct_answer": 1
     },
     {
       "id": 3,
       "category": "verbal",
-      "type": "analogy",
-      "question": "Médico está para medicina assim como engenheiro está para:",
-      "options": [
-        "Construção",
-        "Engenharia",
-        "Projeto",
-        "Máquina"
-      ],
-      "correct_answer": 1,
-      "difficulty": "easy"
+      "difficulty": "hard",
+      "question": "Complete a analogia: Livro está para Autor assim como Sinfonia está para ___",
+      "options": ["Violinista", "Compositor", "Orquestra", "Instrumento"],
+      "correct_answer": 1
     },
     {
       "id": 4,
-      "category": "perceptual",
-      "type": "matrix",
-      "question": "Qual número deveria substituir o ponto de interrogação? [3, 6, 9, 12, ?]",
-      "options": [
-        "14",
-        "15",
-        "16",
-        "18"
-      ],
-      "correct_answer": 3,
-      "difficulty": "easy"
+      "category": "logical",
+      "difficulty": "medium",
+      "question": "Se todos os gatos são animais e alguns animais são perigosos, então:",
+      "options": ["Todos os gatos são perigosos", "Alguns gatos podem ser perigosos", "Nenhum gato é perigoso", "Gatos nunca são animais"],
+      "correct_answer": 1
     },
     {
       "id": 5,
-      "category": "perceptual",
-      "type": "pattern",
-      "question": "Qual é o próximo número na sequência? [2, 4, 8, 16, ?]",
-      "options": [
-        "24",
-        "32",
-        "36",
-        "40"
-      ],
-      "correct_answer": 1,
-      "difficulty": "medium"
+      "category": "numerical",
+      "difficulty": "medium",
+      "question": "Qual número falta na sequência: 2, 4, 8, 16, __, 64?",
+      "options": ["24", "32", "40", "48"],
+      "correct_answer": 1
     },
     {
       "id": 6,
       "category": "perceptual",
-      "type": "logic",
-      "question": "Se todos os A são B e todos os B são C, então todos os A são C?",
-      "options": [
-        "Verdadeiro",
-        "Falso",
-        "Não pode ser determinado",
-        "Depende do contexto"
-      ],
-      "correct_answer": 0,
-      "difficulty": "medium"
+      "difficulty": "hard",
+      "question": "Qual figura completa melhor o padrão?",
+      "options": ["Círculo", "Quadrado", "Triângulo", "Estrela"],
+      "correct_answer": 2
     },
     {
       "id": 7,
-      "category": "memory",
-      "type": "sequence",
-      "question": "Memorize esta sequência de números: 7, 3, 9, 2, 5. Qual era o terceiro número?",
-      "options": [
-        "3",
-        "9",
-        "2",
-        "5"
-      ],
-      "correct_answer": 1,
-      "difficulty": "easy"
+      "category": "verbal",
+      "difficulty": "hard",
+      "question": "Qual palavra melhor descreve 'efêmero'?",
+      "options": ["Permanente", "Transitório", "Eterno", "Imutável"],
+      "correct_answer": 1
     },
     {
       "id": 8,
-      "category": "memory",
-      "type": "recall",
-      "question": "Qual é a capital da França?",
-      "options": [
-        "Lyon",
-        "Marselha",
-        "Paris",
-        "Nice"
-      ],
-      "correct_answer": 2,
-      "difficulty": "easy"
+      "category": "logical",
+      "difficulty": "hard",
+      "question": "Se A > B, B > C, e C > D, qual é a ordem correta?",
+      "options": ["D > C > B > A", "A > B > C > D", "B > A > D > C", "C > D > A > B"],
+      "correct_answer": 1
     },
     {
       "id": 9,
-      "category": "processing_speed",
-      "type": "counting",
-      "question": "Quantos triângulos existem na figura abaixo? (Imagine uma figura com 4 triângulos pequenos formando um triângulo grande)",
-      "options": [
-        "4",
-        "5",
-        "6",
-        "7"
-      ],
-      "correct_answer": 2,
-      "difficulty": "medium"
+      "category": "numerical",
+      "difficulty": "hard",
+      "question": "Qual é o próximo número: 1, 1, 2, 3, 5, 8, 13, __?",
+      "options": ["18", "20", "21", "23"],
+      "correct_answer": 2
     },
     {
       "id": 10,
-      "category": "processing_speed",
-      "type": "matching",
-      "question": "Qual número é diferente? [12, 24, 36, 48, 61]",
-      "options": [
-        "12",
-        "24",
-        "36",
-        "61"
-      ],
-      "correct_answer": 3,
-      "difficulty": "easy"
+      "category": "verbal",
+      "difficulty": "medium",
+      "question": "Qual palavra NÃO pertence ao grupo?",
+      "options": ["Cão", "Gato", "Pássaro", "Cenoura"],
+      "correct_answer": 3
     },
     {
       "id": 11,
-      "category": "verbal",
-      "type": "comprehension",
-      "question": "Se você rearranjasse as letras 'LOCEHO', qual palavra formaria?",
-      "options": [
-        "ESCOLA",
-        "ESCOLHO",
-        "COLHER",
-        "ESCOLHA"
-      ],
-      "correct_answer": 2,
-      "difficulty": "medium"
+      "category": "perceptual",
+      "difficulty": "medium",
+      "question": "Se você dobra um papel quadrado diagonalmente, quantos triângulos você vê?",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": 1
     },
     {
       "id": 12,
-      "category": "perceptual",
-      "type": "spatial",
-      "question": "Se você dobrar um cubo de papel com as faces numeradas de 1 a 6, qual número fica oposto ao 1?",
-      "options": [
-        "2",
-        "3",
-        "5",
-        "6"
-      ],
-      "correct_answer": 3,
-      "difficulty": "hard"
+      "category": "logical",
+      "difficulty": "hard",
+      "question": "Um relógio marca 3:00. Qual é o ângulo entre os ponteiros?",
+      "options": ["60°", "90°", "120°", "150°"],
+      "correct_answer": 1
     },
     {
       "id": 13,
-      "category": "memory",
-      "type": "working_memory",
-      "question": "Se A = 1, B = 2, C = 3... Z = 26, qual é o valor de D + E + F?",
-      "options": [
-        "12",
-        "14",
-        "15",
-        "18"
-      ],
-      "correct_answer": 2,
-      "difficulty": "medium"
+      "category": "numerical",
+      "difficulty": "medium",
+      "question": "Se X + Y = 10 e X - Y = 2, qual é o valor de X?",
+      "options": ["4", "6", "8", "12"],
+      "correct_answer": 1
     },
     {
       "id": 14,
-      "category": "processing_speed",
-      "type": "visual_search",
-      "question": "Encontre a letra 'Q' na sequência: PQRSTUVWXYZ",
-      "options": [
-        "1ª posição",
-        "2ª posição",
-        "3ª posição",
-        "Não existe"
-      ],
-      "correct_answer": 1,
-      "difficulty": "easy"
+      "category": "verbal",
+      "difficulty": "hard",
+      "question": "Complete: 'A persistência é a _____ da alma'",
+      "options": ["Fraqueza", "Força", "Virtude", "Coragem"],
+      "correct_answer": 2
     },
     {
       "id": 15,
+      "category": "logical",
+      "difficulty": "hard",
+      "question": "Qual é o próximo número na sequência: 1, 4, 9, 16, 25, __?",
+      "options": ["30", "36", "40", "49"],
+      "correct_answer": 1
+    },
+    {
+      "id": 16,
+      "category": "perceptual",
+      "difficulty": "hard",
+      "question": "Qual figura é diferente das outras?",
+      "options": ["Quadrado", "Retângulo", "Losango", "Círculo"],
+      "correct_answer": 3
+    },
+    {
+      "id": 17,
+      "category": "numerical",
+      "difficulty": "hard",
+      "question": "Qual é a raiz quadrada de 289?",
+      "options": ["15", "17", "19", "21"],
+      "correct_answer": 1
+    },
+    {
+      "id": 18,
       "category": "verbal",
-      "type": "reasoning",
-      "question": "Qual é a conclusão lógica? Todos os pássaros têm asas. Pinguins são pássaros. Portanto:",
-      "options": [
-        "Pinguins não têm asas",
-        "Pinguins têm asas",
-        "Nem todos os pinguins têm asas",
-        "Não pode ser determinado"
-      ],
-      "correct_answer": 1,
-      "difficulty": "easy"
+      "difficulty": "medium",
+      "question": "Qual é o sinônimo de 'perspicaz'?",
+      "options": ["Cego", "Agudo", "Lento", "Surdo"],
+      "correct_answer": 1
+    },
+    {
+      "id": 19,
+      "category": "logical",
+      "difficulty": "medium",
+      "question": "Se Maria é mais alta que João e João é mais alto que Pedro, então:",
+      "options": ["Pedro é mais alto que Maria", "Maria é mais alta que Pedro", "João é o mais alto", "Não há informação suficiente"],
+      "correct_answer": 1
+    },
+    {
+      "id": 20,
+      "category": "perceptual",
+      "difficulty": "medium",
+      "question": "Quantos cubos há em uma estrutura 3x3x3?",
+      "options": ["9", "18", "27", "36"],
+      "correct_answer": 2
+    },
+    {
+      "id": 21,
+      "category": "verbal",
+      "difficulty": "hard",
+      "question": "Qual palavra melhor completa a frase: 'Seu comportamento foi absolutamente ___'?",
+      "options": ["Apropriado", "Repugnante", "Neutro", "Comum"],
+      "correct_answer": 1
+    },
+    {
+      "id": 22,
+      "category": "numerical",
+      "difficulty": "hard",
+      "question": "Se um produto custa R$ 100 e tem 20% de desconto, depois 10% de desconto adicional, qual é o preço final?",
+      "options": ["R$ 70", "R$ 72", "R$ 80", "R$ 90"],
+      "correct_answer": 1
+    },
+    {
+      "id": 23,
+      "category": "logical",
+      "difficulty": "hard",
+      "question": "Qual número vem a seguir: 2, 6, 12, 20, 30, __?",
+      "options": ["40", "42", "44", "48"],
+      "correct_answer": 1
+    },
+    {
+      "id": 24,
+      "category": "perceptual",
+      "difficulty": "hard",
+      "question": "Se você reflete um triângulo em uma linha vertical, qual é o resultado?",
+      "options": ["Um triângulo invertido", "Um triângulo idêntico", "Um quadrado", "Um losango"],
+      "correct_answer": 1
+    },
+    {
+      "id": 25,
+      "category": "verbal",
+      "difficulty": "hard",
+      "question": "Complete a analogia: Microscópio está para Pequeno assim como Telescópio está para ___",
+      "options": ["Próximo", "Distante", "Grande", "Claro"],
+      "correct_answer": 1
+    },
+    {
+      "id": 26,
+      "category": "numerical",
+      "difficulty": "hard",
+      "question": "Qual é o resultado de 15² - 12²?",
+      "options": ["81", "99", "117", "135"],
+      "correct_answer": 1
+    },
+    {
+      "id": 27,
+      "category": "logical",
+      "difficulty": "hard",
+      "question": "Se A = 1, B = 2, C = 3... Z = 26, qual é o valor de TESTE?",
+      "options": ["95", "105", "115", "125"],
+      "correct_answer": 2
+    },
+    {
+      "id": 28,
+      "category": "perceptual",
+      "difficulty": "hard",
+      "question": "Qual padrão continua a sequência?",
+      "options": ["Quadrado, Triângulo, Círculo", "Círculo, Quadrado, Triângulo", "Triângulo, Círculo, Quadrado", "Quadrado, Círculo, Triângulo"],
+      "correct_answer": 2
+    },
+    {
+      "id": 29,
+      "category": "verbal",
+      "difficulty": "hard",
+      "question": "Qual palavra é mais próxima do significado de 'obfuscação'?",
+      "options": ["Clareza", "Obscuridade", "Transparência", "Simplicidade"],
+      "correct_answer": 1
+    },
+    {
+      "id": 30,
+      "category": "numerical",
+      "difficulty": "hard",
+      "question": "Se você tem 12 maçãs e dá 1/3 para um amigo e 1/4 do restante para outro, quantas você tem?",
+      "options": ["4", "6", "8", "10"],
+      "correct_answer": 2
+    },
+    {
+      "id": 31,
+      "category": "logical",
+      "difficulty": "hard",
+      "question": "Qual é o próximo elemento: Fogo, Água, Terra, Ar, __?",
+      "options": ["Éter", "Vento", "Vácuo", "Luz"],
+      "correct_answer": 0
+    },
+    {
+      "id": 32,
+      "category": "perceptual",
+      "difficulty": "hard",
+      "question": "Se você tem um cubo e o corta em 8 cubos menores de igual tamanho, qual é a razão entre o volume original e um cubo menor?",
+      "options": ["2:1", "4:1", "8:1", "16:1"],
+      "correct_answer": 2
     }
   ]
 }
-
